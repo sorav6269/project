@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: rgb(24, 5, 5);
+    }
+
+    .con {
+        display: block;
+        width: 40%;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border: 2px solid white;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    #textbox {
+        margin: 2px 2px;
+        padding: 10px 20px;
+        border: 0;
+        outline: 0;
+        font-size: 20px;
+        border-radius: 5px;
+    }
+    
+    #text{
+        display: block;
+        font-size: 2em;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: white;
+        border-bottom: 3px solid whitesmoke;
+    
+    }
+
+    #image {
+display:inline-block;
+    margin: -16px 20px;
+        height: 40px;
+    }
+ #button {
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+      font-weight: 300;
+ margin: 15px 2px;
+      padding: 15px 25px;
+ color:#fff;
+      font-size: 25px;  
+      background:#019f55;
+      
+    
+    }
+    .con button img{
+        padding: 1px 5px ;
+ color: #fff;      
+      width: 28px;
+    }
+</style>
+
+<body>
+    <div class="con">
+        <h1 id="text">random number generater</h1>
+        <input type="text" id="textbox" placeholder="password">
+        <img src="img/copy.png" alt="image error" id="image" onclick="copy()">
+        <button id="button" onclick=" ram()"><img src="img/pass.png" > Generate password</button>
+    </div>
+<script>
+
+    const code = document.getElementById("textbox")
+    const length = 20;
+    const number = "1234567890";
+    const upperCase = "QWERTYUIOASDFGHJKLZXCVBNMP";
+    const lowerCase = "xcvbnmasdfghjklqwertyuiop";
+    // const special ="!@#$%^&*()_+:?";
+    const allchar = number + upperCase + lowerCase ; 
+    function ram() {
+       let password = "";
+       password += upperCase[Math.floor(Math.random()*upperCase.length)];
+       password += lowerCase[Math.floor(Math.random()*lowerCase.length)];
+       password += number[Math.floor(Math.random()*number.length)];
+    //    password += special[Math.floor(Math.random()*special.length)];
+       if(length>password.length){
+password+= allchar[Math.floor(Math.random()*allchar.length)];
+}
+
+code.value = password ;      
+}
+ function copy(){
+    code.select();
+    document.execCommand("copy")
+ }
+</script>
+</body>
+</html>

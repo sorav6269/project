@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(56, 39, 39);
+    }
+
+    .messege-box {
+        display: inline-block;
+        margin: 1px 45%;
+
+    }
+
+    .hide {
+        display: none;
+    }
+
+    #msg {
+        margin-top: 10px;
+        font-size: 20px;
+        color: #ffd;
+        font-family: Arial, Helvetica, sans-serif;
+        gap: 10px;
+    }
+
+    .newgame {
+        padding: 5px;
+        font-size: 20px;
+        border-radius: 10px;
+        background-color: #3c4038;
+        color: #18ef43;
+    }
+
+    .con {
+        display: flex;
+        position: relative;
+        align-items: center;
+        margin-top: 10%;
+        justify-content: center;
+        height: 10px;
+        width: 100%;
+    }
+
+    .button {
+        display: flex;
+        position: relative;
+        margin: 5px;
+        height: 60px;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        background: rgb(50, 45, 33);
+        border: 1px solid rgb(0, 0, 0);
+        color: white;
+        font-size: x-large;
+        border-radius: 10px;
+        box-shadow: 2px 2px 12.2s chartreuse;
+    }
+
+    .game {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        color: chartreuse;
+    }
+    .resetbutton{
+        display: flex;
+        position:relative;
+        justify-content: center;
+        margin-top: 130px;
+    
+    }
+    .reset{
+        padding: 10px;
+        font-size: x-large;
+        border-radius: 10px;
+        background-color: #ffcb22;
+        color:black;    
+    }
+    .reset:hover{
+        box-shadow: 0 0 40px rgb(102, 144, 221) ,0  0 40px rgb(102, 144, 221),0 0 40px rgb(102, 144, 221),0 0 40px rgb(102, 144, 221) ;
+        
+    }
+</style>
+
+<body>
+
+    <div class="messege-box hide">
+        <h1 id="msg">winner</h1>
+        <button class="newgame">New Game</button>
+    </div>
+    <div class="game">
+        <h1>Tic Tac Toe</h1>
+    </div>
+    <div class="con">
+        <div>
+            <button class="button"></button>
+            <button class="button"></button>
+            <button class="button"></button>
+        </div>
+
+        <div>
+            <button class="button"></button>
+            <button class="button"></button>
+            <button class="button"></button>
+        </div>
+
+        <div>
+            <button class="button"></button>
+            <button class="button"></button>
+            <button class="button"></button>
+        </div>
+    </div>
+    <div class="resetbutton">
+
+        <button class="reset">Reset Game</button>
+    </div>
+    <script>
+        let boxes = document.querySelectorAll('.button');
+        let newgames = document.querySelector('.newgame')
+        let messeges = document.querySelector('.messege-box')
+        let msg = document.querySelector('#msg')
+        let resets = document.querySelector('.reset')
+        let turn1 = true;
+        let array = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        boxes.forEach(box => {
+            box.addEventListener("click", () => {
+                if (turn1) {
+                    box.innerHTML = "0"
+                    turn1 = false
+                }
+                else {
+                    box.innerHTML = "x"
+                    turn1 = true
+                }
+                box.disabled = true
+                win();
+            });
+        });
+
+        let resetbutt=()=>{
+            turn1=true;
+            enablebax();
+            messeges.classList.add('hide')
+        }
+        let disablebax = () => {
+            for (const disable of boxes) {
+                disable.disabled=true
+            }
+        }
+        let enablebax = () => {
+            for (const disable of boxes) {
+                disable.disabled=false
+                disable.innerText="";
+                
+            }
+    }
+        let show = (winner) => {
+            msg.innerText = `you are winner ${winner}`
+            messeges.classList.remove('hide')
+            disablebax()
+        }
+
+        let win = () => {
+            for (let pattern of array) {
+                let var0 = boxes[pattern[0]].innerText;
+                let var1 = boxes[pattern[1]].innerText;
+                let var2 = boxes[pattern[2]].innerText;
+                if (var0 != "" && var1 != "" && var2 != "") {
+                    if (var0 === var1 && var1 === var2) {
+                        show(var0)
+                    }
+                }
+            }
+        }
+resets.addEventListener('click',resetbutt)
+newgames.addEventListener('click',resetbutt)
+    </script>
+</body>
+
+</html>

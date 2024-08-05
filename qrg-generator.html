@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+        background-color: black;
+    }
+
+    .con {
+
+        background-color: white;
+        margin: 200px 400px;
+        padding: 8px 15px;
+        height: 350px;
+        width: 25%;
+        border: 2px solid yellow;
+        border-radius: 10px;
+    }
+
+    #text {
+        color: rgb(0, 0, 0);
+    }
+
+    #textbox {
+        width: 300px;
+        height: 15%;
+        margin: 5px 5px;
+        padding: 5px 10px;
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+
+    #butt {
+        width: 300px;
+        margin: 8px 5px;
+        padding: 5px 5px;
+        font-size: 100%;
+        background-color: rgb(18, 59, 173);
+        color: white;
+        border-radius: 10px;
+    }
+
+    .image {
+        display: block;
+        width: 60%;
+        margin: 5px auto;
+        size: 30px;
+        padding: 5px 15px;
+    }
+    .error{
+        animation: shake 0.1s linear 10;
+    }
+    @keyframes shake {
+            0%{
+                transform: translateX(0);
+            }
+            25%{
+                transform: translateX(-2px);
+            }
+            50%{
+                transform: translateX(0px);
+            }
+            75%{
+                transform: translateX(2px);
+            }
+            100%{
+                transform: translateX(0);
+            }
+            
+        }
+</style>
+
+<body>
+    <div class="con">
+        <h1 id="text">Generate QR Code</h1>
+        <input type="text" id="textbox" placeholder="Enter Text and Url">
+        <img src="" id="img" >
+        <button id="butt" onclick="Generateqr()">Generate Qr Code</button>
+    </div>
+    <script>
+        let textbox = document.getElementById("textbox");
+        let button = document.getElementById("butt")
+        let imgbox = document.getElementById("img")
+        function Generateqr() {
+            if (textbox.value.length > 0) {
+
+                imgbox.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + textbox.value;
+                imgbox.classList.add("image")
+             }else
+             {
+                textbox.classList.add("error")
+                setTimeout(()=>{
+                    textbox.classList.add("error")
+                },500)
+            }
+         }
+    </script>
+</body>
+
+</html>
